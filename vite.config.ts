@@ -2,7 +2,6 @@ import { fileURLToPath, URL } from "node:url";
 
 import { defineConfig } from "vite";
 import vue from "@vitejs/plugin-vue";
-import viteCompression from "vite-plugin-compression"; //开启压缩，注：需要配合nginx开启gzip，此项目并不部署，可忽略
 
 import { visualizer } from "rollup-plugin-visualizer"; //build 视图分析依赖文件
 
@@ -23,14 +22,6 @@ export default defineConfig({
       dts: "src/typings/components.d.ts", // 生成在src路径下名为auto-import.d.ts的声明文件
       dirs: ["src/components"], // 配置需要默认导入的自定义组件文件夹，该文件夹下的所有组件都会自动 import
     }),
-    false &&
-      viteCompression({
-        verbose: true,
-        disable: false,
-        threshold: 10240,
-        algorithm: "gzip",
-        ext: ".gz",
-      }),
     visualizer({
       emitFile: true,
       filename: "visualizer.html", //分析图生成的文件名
